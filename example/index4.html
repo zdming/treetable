@@ -1,0 +1,88 @@
+<html>
+<head>
+  
+</head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<!-- <script src="../src/jquery-1.11.1.js"></script> -->
+<script type="text/javascript" src="../src/javascripts/jquery.treetable-ajax-persist.js"></script>
+<script type="text/javascript" src="../src/javascripts/jquery.treetable-3.0.0.js"></script>
+<script type="text/javascript" src="../src/javascripts/persist-min.js"></script>
+
+
+<script src="../src/jquery-ui-1.12.0.custom/jquery-ui.js"></script>
+
+<link href="../src/stylesheets/jquery.treetable.css" media="all" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="../src/jquery-ui-1.12.0.custom/jquery-ui.css">
+<script type="text/javascript">
+
+$(document).ready(function(){
+  
+  $("#example-advanced").agikiTreeTable({persist: true, persistStoreName: "files",expandable: true});
+  
+  $("#example-advanced tbody").on("mousedown", "tr", function() {
+     $(".selected").not(this).removeClass("selected");
+      $(this).toggleClass("selected");
+});
+
+
+  $("#example-advanced tbody").sortable({
+    revert:false,
+    placeholder: "ui-state-highlight",
+    cursor: "pointer",
+    axis:"y",
+    cursor:"move",
+    beforeStop: function( event, ui ) {
+      var seleEle=$(".selected").data("ttParentId");
+      var preEle=$(".ui-state-highlight").prev().data("ttParentId");
+      var nextEle=$(".ui-state-highlight").next().data("ttParentId");
+     if(seleEle!=preEle || seleEle!=nextEle){
+          return false;
+          
+       }
+     
+    }
+  });
+$("#example-advanced,tr.fileFa").disableSelection();
+
+});
+
+</script>
+<body>
+
+      <table id="example-advanced">
+        <caption>
+          <a href="#" onclick="jQuery('#example-advanced').treetable('expandAll'); return false;">Expand all</a>
+          <a href="#" onclick="jQuery('#example-advanced').treetable('collapseAll'); return false;">Collapse all</a>
+        </caption>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Kind</th>
+            <th>Size</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr data-tt-id='1'><td><span class='file'>Acknowledgements.rtf</span></td><td>File</td><td>480.95 KB</td></tr>
+      <tr data-tt-id='2' class="folderFa"><td><span class='folder'>CHUD</span></td><td>Folder</td><td>--</td></tr>
+      <tr data-tt-id='2-1' data-tt-parent-id='2' class="folderFa"><td><span class='folder'>amber</span></td><td>Folder</td><td>--</td></tr>
+      <tr data-tt-id='2-1-1' data-tt-parent-id='2-1' class="fileFa ui-state-default"><td><span class='file'>AmberTraceFormats.pdf</span></td><td>File</td><td>124.46 KB</td></tr>
+      <tr data-tt-id='2-2' data-tt-parent-id='2' class="folderFa"><td><span class='folder'>BigTop</span></td><td>Folder</td><td>--</td></tr>
+      <tr data-tt-id='2-2-1' data-tt-parent-id='2-2' class="fileFa ui-state-default"><td><span class='file'>BigTopUserGuide.pdf</span></td><td>File</td><td>1314.71 KB</td></tr>
+      <tr data-tt-id='2-3' data-tt-parent-id='2' class="folderFa"><td><span class='folder'>Saturn</span></td><td>Folder</td><td>--</td></tr>
+      <tr data-tt-id='2-3-1' data-tt-parent-id='2-3' class="fileFa ui-state-default"><td><span class='file'>SaturnUserGuide.pdf</span></td><td>File</td><td>694.29 KB</td></tr>
+      <tr data-tt-id='2-3-2' data-tt-parent-id='2-3' class="fileFa ui-state-default"><td><span class='file'>SaturnUserGuide2.pdf</span></td><td>File</td><td>694.29 KB</td></tr>
+      <tr data-tt-id='2-3-3' data-tt-parent-id='2-3' class="fileFa ui-state-default"><td><span class='file'>SaturnUserGuide3.pdf</span></td><td>File</td><td>694.29 KB</td></tr>
+      <tr data-tt-id='2-4' data-tt-parent-id='2' class="folderFa"><td><span class='folder'>Shark</span></td><td>Folder</td><td>--</td></tr>
+      <tr data-tt-id='2-4-1' data-tt-parent-id='2-4' class="fileFa ui-state-default"><td><span class='file'>SharkUserGuide.pdf</span></td><td>File</td><td>12902.51 KB</td></tr>
+      
+
+      <tr data-tt-id='2-5' data-tt-parent-id='2' class="folderFa"><td><span class='folder'>simg4</span></td><td>Folder</td><td>--</td></tr>
+      <tr data-tt-id='2-6' data-tt-parent-id='2' class="folderFa"><td><span class='folder'>simg4_plus</span></td><td>Folder</td><td>--</td></tr>
+      <tr data-tt-id='2-7' data-tt-parent-id='2' class="folderFa"><td><span class='folder'>simg5</span></td><td>Folder</td><td>--</td></tr>
+
+        </tbody>
+      </table>
+
+
+</body>
+</html>
